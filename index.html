@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Plaza Residences — New York's Most Prestigious Address</title>
+  <meta name="description"
+    content="Experience The Plaza Residences, an iconic luxury living destination at the corner of Fifth Avenue and Central Park South in New York City." />
+  <meta property="og:title" content="The Plaza Residences — New York's Most Prestigious Address" />
+  <meta property="og:description"
+    content="A cinematic journey through New York's most legendary address. Private residences at The Plaza Hotel." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,700;1,6..96,400&family=Montserrat:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════════════════════════
+       HEADER — Sticky Navigation
+       ═══════════════════════════════════════════════════ -->
+  <header class="site-header">
+    <div class="site-header__inner">
+      <div class="site-header__logo">THE PLAZA</div>
+      <nav class="site-header__nav">
+        <a href="#section-hero">Residences</a>
+        <a href="#features">Amenities</a>
+        <a href="#inquiry" class="btn-outline">Inquire</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════
+       PRELOADER — Luxury branded loading experience
+       ═══════════════════════════════════════════════════ -->
+  <div id="preloader" aria-live="polite" aria-label="Loading experience">
+    <div class="preloader__inner">
+      <p class="preloader__eyebrow">Est. 1907</p>
+      <h1 class="preloader__title">THE PLAZA</h1>
+      <p class="preloader__subtitle">Residences</p>
+      <div class="preloader__bar-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+        <div class="preloader__bar-fill" id="preloader-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       CANVAS — Fixed full-viewport sequence renderer
+       ═══════════════════════════════════════════════════ -->
+  <canvas id="canvas" aria-hidden="true"></canvas>
+  <div class="canvas-scrim"></div>
+
+  <!-- ═══════════════════════════════════════════════════
+       SCROLL CONTENT — Editorial overlay sections
+       ═══════════════════════════════════════════════════ -->
+  <main id="scroll-content">
+
+    <!-- SECTION 1: Hero Text Overlay -->
+    <section class="scroll-section scroll-section--hero" id="section-hero">
+      <div class="scroll-section__inner" data-fade>
+        <p class="scroll-section__eyebrow">Fifth Avenue &amp; Central Park South</p>
+        <h3 class="scroll-section__headline">The Plaza<br />Residences</h3>
+        <p class="scroll-section__body">New York's most legendary address,<br />reimagined for private living.</p>
+      </div>
+    </section>
+
+    <!-- SECTION 2: Legacy / Heritage -->
+    <section class="scroll-section scroll-section--long" id="section-legacy">
+      <div class="scroll-section__inner" data-fade>
+        <h2 class="scroll-section__headline scroll-section__headline--sm">A Legacy<br />of Elegance</h2>
+        <p class="scroll-section__body">Since 1907, The Plaza has stood at the intersection of history and grandeur. Its
+          Beaux-Arts facade has welcomed presidents, royalty, and visionaries through its gilded doors.</p>
+      </div>
+    </section>
+
+    <!-- SECTION 3: Transition Moment — entering the doors -->
+    <section class="scroll-section scroll-section--longest" id="section-enter">
+      <div class="scroll-section__inner" data-fade>
+        <p class="scroll-section__eyebrow">Step Inside</p>
+        <h2 class="scroll-section__headline">Enter<br />The Plaza</h2>
+      </div>
+    </section>
+
+    <!-- SECTION 4: Wait for sequence to enter the lobby -->
+    <section class="scroll-section scroll-section--seq2-spacer" aria-hidden="true"></section>
+
+    <!-- SECTION 5: Interior / Lobby -->
+    <section class="scroll-section scroll-section--seq2-lobby" id="section-lobby">
+      <div class="scroll-section__inner" data-fade>
+        <h2 class="scroll-section__headline scroll-section__headline--sm">The Grand<br />Lobby</h2>
+        <p class="scroll-section__body">Crystal chandeliers, marble floors, and floral arrangements composed daily —
+          every detail curated to perfection.</p>
+      </div>
+    </section>
+
+    <!-- SECTION 6: Spacer to extend canvas scroll range and let the lobby sequence play out entirely empty -->
+    <section class="scroll-section scroll-section--seq2-end" id="section-spacer" aria-hidden="true"></section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════════════
+       EDITORIAL CONTENT — Below the canvas experience
+       ═══════════════════════════════════════════════════ -->
+  <div id="editorial-content">
+
+    <!-- ═══════════════════════════════════════════════════
+         NEW SECTION: THE CULINARY LANDMARKS
+         ═══════════════════════════════════════════════════ -->
+    <section class="editorial-section culinary-showcase" id="culinary">
+      <div class="editorial-section__inner">
+        <div class="culinary-showcase__grid">
+          <div class="culinary-showcase__left" data-fade>
+            <p class="section-eyebrow">CULINARY SIGNATURES</p>
+            <h2 class="section-headline">A Century of<br />Exquisite Taste</h2>
+            <div class="culinary-showcase__image-wrap mt-space">
+              <img src="/images/palm_court.png" alt="The Palm Court Afternoon Tea" class="editorial-image" />
+            </div>
+            <h3 class="subsection-headline mt-space-sm">The Palm Court</h3>
+            <p class="section-body mt-text">Afternoon Tea served under the historic stained-glass dome. A lush oasis of palms and crystal chandeliers.</p>
+          </div>
+          <div class="culinary-showcase__right" data-fade>
+            <div class="culinary-showcase__image-wrap culinary-showcase__image-wrap--offset">
+              <img src="/images/champagne_bar.png" alt="The Champagne Bar" class="editorial-image" />
+            </div>
+            <h3 class="subsection-headline mt-space-sm">The Champagne Bar</h3>
+            <p class="section-body mt-text">Celebrating New York society with vintage champagnes, caviar, and views overlooking Fifth Avenue.</p>
+            <hr class="fine-divider mt-space mb-space" />
+            <h3 class="subsection-headline">The Rose Club</h3>
+            <p class="section-body mt-text">A legendary salon for cocktails, once hosting the greatest voices in jazz.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DIVIDER -->
+    <hr class="editorial-divider" />
+
+    <!-- ═══════════════════════════════════════════════════
+         NEW SECTION: THE PRIVATE COLLECTION (SUITES)
+         ═══════════════════════════════════════════════════ -->
+    <section class="editorial-section suites-gallery" id="suites-gallery">
+      <div class="editorial-section__inner">
+        <div class="suites-gallery__header text-center" data-fade>
+          <p class="section-eyebrow">PRIVATE RESIDENCES</p>
+          <h2 class="section-headline">Masterpieces of<br />Living Space</h2>
+        </div>
+        
+        <div class="suites-gallery__interactive mt-space-lg" data-fade>
+          <div class="suites-tabs" role="tablist">
+            <button class="suite-tab active" role="tab" aria-selected="true" data-target="suite-royal">The Royal Plaza Suite</button>
+            <button class="suite-tab" role="tab" aria-selected="false" data-target="suite-fitzgerald">The Fitzgerald Suite</button>
+            <button class="suite-tab" role="tab" aria-selected="false" data-target="suite-park">Park View Penthouse</button>
+          </div>
+          
+          <div class="suites-content">
+            <div class="suite-panel active" id="suite-royal" role="tabpanel">
+              <div class="suite-panel__image-wrap">
+                <img src="/images/royal_suite.png" alt="The Royal Plaza Suite" class="editorial-image" />
+              </div>
+              <div class="suite-panel__details">
+                <h3 class="subsection-headline">The Royal Plaza Suite</h3>
+                <p class="section-body mt-text">The pinnacle of grand living. Three bedrooms, a formal dining salon, private library, and hand-selected European antiques with direct views of Fifth Avenue.</p>
+              </div>
+            </div>
+            
+            <div class="suite-panel" id="suite-fitzgerald" role="tabpanel">
+              <div class="suite-panel__image-wrap">
+                <img src="/images/royal_suite.png" alt="The Fitzgerald Suite" class="editorial-image style-sepia" />
+              </div>
+              <div class="suite-panel__details">
+                <h3 class="subsection-headline">The Fitzgerald Suite</h3>
+                <p class="section-body mt-text">Jazz Age opulence, inspired by F. Scott Fitzgerald. Featuring original custom library woodwork, gilded moldings, and Central Park panoramas.</p>
+              </div>
+            </div>
+            
+            <div class="suite-panel" id="suite-park" role="tabpanel">
+              <div class="suite-panel__image-wrap">
+                <img src="/images/royal_suite.png" alt="Park View Penthouse" class="editorial-image style-dimmed" />
+              </div>
+              <div class="suite-panel__details">
+                <h3 class="subsection-headline">Park View Penthouse</h3>
+                <p class="section-body mt-text">Modern refinement meets historic architecture. Double-height ceilings, a private terrace overlooking Central Park, and a monumental marble hearth fireplace.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DIVIDER -->
+    <hr class="editorial-divider" />
+
+    <!-- ═══════════════════════════════════════════════════
+         NEW SECTION: THE WELLNESS SANCTUARY
+         ═══════════════════════════════════════════════════ -->
+    <section class="editorial-section spa-section" id="spa-wellness">
+      <div class="editorial-section__inner">
+        <div class="spa-section__grid">
+          <div class="spa-section__text" data-fade>
+            <p class="section-eyebrow">WELLNESS &amp; SPA</p>
+            <h2 class="section-headline">Guerlain Spa at<br />The Plaza</h2>
+            <p class="section-body mt-space-sm">A sanctuary of Parisian skin therapies and restorative care. Private treatment suites, vitality pool, and the Warren-Tricomi salon offer a complete retreat from the city. Every detail curated for tranquility.</p>
+          </div>
+          <div class="spa-section__image-wrap" data-fade>
+            <img src="/images/guerlain_spa.png" alt="Guerlain Spa Wellness Sanctuary" class="editorial-image" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DIVIDER -->
+    <hr class="editorial-divider" />
+
+    <!-- ═══════════════════════════════════════════════════
+         NEW SECTION: HERITAGE TIMELINE
+         ═══════════════════════════════════════════════════ -->
+    <section class="editorial-section heritage-timeline" id="heritage">
+      <div class="editorial-section__inner max-w-narrow text-center">
+        <div data-fade>
+          <p class="section-eyebrow">HISTORIC LEGACY</p>
+          <h2 class="section-headline mb-space-lg">Where History<br />Meets Grandeur</h2>
+        </div>
+        
+        <div class="timeline">
+          <div class="timeline__item" data-fade>
+            <p class="timeline__year">1907</p>
+            <h3 class="timeline__title">The Grand Opening</h3>
+            <p class="timeline__desc">Designed by Henry Janeway Hardenbergh as a masterpiece of French Renaissance architecture.</p>
+          </div>
+          <div class="timeline__item" data-fade>
+            <p class="timeline__year">1925</p>
+            <h3 class="timeline__title">The Jazz Age</h3>
+            <p class="timeline__desc">Setting for F. Scott Fitzgerald's legendary scenes, forever immortalizing the hotel's cultural spirit.</p>
+          </div>
+          <div class="timeline__item" data-fade>
+            <p class="timeline__year">1966</p>
+            <h3 class="timeline__title">The Party of the Century</h3>
+            <p class="timeline__desc">Truman Capote's legendary Black and White Ball transformed the Grand Ballroom into a cultural phenomenon.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DIVIDER -->
+    <hr class="editorial-divider" />
+
+    <!-- RESIDENCE FEATURES — Bento Grid -->
+    <section class="bento" id="features">
+      <div class="bento__header" data-fade>
+        <p class="bento__eyebrow">The Residences</p>
+        <h2 class="bento__headline">Curated for<br />Distinction</h2>
+      </div>
+      <div class="bento__grid">
+        <div class="bento__card bento__card--wide" data-fade>
+          <span class="bento__icon">◆</span>
+          <h3 class="bento__card-title">Private Residences</h3>
+          <p class="bento__card-body">One- to four-bedroom residences with Central Park views, bespoke interiors, and
+            dedicated entrances on 58th and 59th Streets.</p>
+        </div>
+        <div class="bento__card" data-fade>
+          <span class="bento__icon">◆</span>
+          <h3 class="bento__card-title">White Glove Service</h3>
+          <p class="bento__card-body">24-hour concierge, housekeeping, and in-residence dining from The Palm Court.</p>
+        </div>
+        <div class="bento__card" data-fade>
+          <span class="bento__icon">◆</span>
+          <h3 class="bento__card-title">The Plaza Spa</h3>
+          <p class="bento__card-body">A private wellness sanctuary featuring Guerlain treatments and a serene vitality
+            pool.</p>
+        </div>
+        <div class="bento__card" data-fade>
+          <span class="bento__icon">◆</span>
+          <h3 class="bento__card-title">Culinary Excellence</h3>
+          <p class="bento__card-body">The Palm Court, The Champagne Bar, and private chef services available
+            in-residence.</p>
+        </div>
+        <div class="bento__card" data-fade>
+          <span class="bento__icon">◆</span>
+          <h3 class="bento__card-title">Fitness & Wellness</h3>
+          <p class="bento__card-body">State-of-the-art fitness center with personal training and movement studios.</p>
+        </div>
+        <div class="bento__card bento__card--wide" data-fade>
+          <span class="bento__icon">◆</span>
+          <h3 class="bento__card-title">Legacy & Provenance</h3>
+          <p class="bento__card-body">Own a piece of living history. The Plaza is a National Historic Landmark, and its
+            residences carry one of the most storied addresses in the world — 1 Central Park South.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DIVIDER -->
+    <hr class="editorial-divider" />
+
+    <!-- INQUIRY FORM -->
+    <section class="inquiry" id="inquiry">
+      <div class="inquiry__layout">
+        <div class="inquiry__text" data-fade>
+          <p class="inquiry__eyebrow">Private Inquiry</p>
+          <h2 class="inquiry__headline">Begin Your<br />Residence Journey</h2>
+          <p class="inquiry__body">Schedule a private viewing or request further information about available residences
+            at The Plaza.</p>
+        </div>
+        <form class="inquiry__form" id="inquiry-form" novalidate data-fade>
+          <div class="form-group">
+            <label for="form-name" class="form-label">Full Name</label>
+            <input type="text" id="form-name" name="name" class="form-input" required autocomplete="name" />
+            <span class="form-error" id="form-name-error"></span>
+          </div>
+          <div class="form-group">
+            <label for="form-email" class="form-label">Email Address</label>
+            <input type="email" id="form-email" name="email" class="form-input" required autocomplete="email" />
+            <span class="form-error" id="form-email-error"></span>
+          </div>
+          <div class="form-group">
+            <label for="form-phone" class="form-label">Phone Number</label>
+            <input type="tel" id="form-phone" name="phone" class="form-input" autocomplete="tel" />
+            <span class="form-error" id="form-phone-error"></span>
+          </div>
+          <div class="form-group">
+            <label for="form-message" class="form-label">Message</label>
+            <textarea id="form-message" name="message" class="form-input form-input--textarea" rows="4"></textarea>
+          </div>
+          <button type="submit" class="form-submit" id="form-submit-btn">
+            Request Private Viewing
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <p class="footer__title">THE PLAZA</p>
+          <p class="footer__address">768 Fifth Avenue<br />New York, NY 10019</p>
+        </div>
+        <div class="footer__links">
+          <a href="tel:+12125597000" class="footer__link">+1 (212) 559-7000</a>
+          <a href="mailto:residences@theplazany.com" class="footer__link">residences@theplazany.com</a>
+        </div>
+        <p class="footer__legal">&copy; 2026 The Plaza. A Fairmont Managed Hotel. All rights reserved.</p>
+      </div>
+    </footer>
+
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
