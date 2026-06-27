@@ -103,7 +103,14 @@ body {
   color: var(--color-cream);
   background-color: var(--color-onyx);
   line-height: 1.6;
-  overflow-x: hidden;
+  overflow-x: visible;
+}
+
+/* `overflow-x: clip` on html clips horizontal overflow without creating a
+   scroll context, so `position: sticky` descendants (e.g. .iconic-spaces__sticky-panel)
+   remain pinned on Safari. */
+html {
+  overflow-x: clip;
 }
 
 /* ─── Selection ─── */
@@ -1010,6 +1017,139 @@ body {
   font-size: var(--text-sm);
   color: var(--color-cream-muted);
   line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════════════════
+   ICONIC SPACES — Horizontal Scroll Showcase
+   Outer section provides 300vh of scroll length; the inner sticky
+   panel pins while the track translates horizontally as a function
+   of vertical scroll progress. Pure transform — compositor only.
+   ═══════════════════════════════════════════════════ */
+.iconic-spaces {
+  background-color: var(--color-onyx);
+  position: relative;
+  min-height: 300vh; /* scroll length for horizontal mapping */
+}
+
+.iconic-spaces__header {
+  padding: var(--space-3xl) clamp(1.5rem, 5vw, 6rem) var(--space-xl);
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.iconic-spaces__sticky-panel {
+  position: sticky;
+  top: 0;
+  height: 100svh; /* svh avoids iOS Safari URL-bar issue */
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.iconic-spaces__track {
+  display: flex;
+  gap: clamp(2rem, 4vw, 4rem);
+  padding: 0 clamp(1.5rem, 5vw, 6rem);
+  list-style: none;
+  margin: 0;
+  min-width: 400vw; /* layout fallback before JS measures */
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+}
+
+.iconic-spaces__slide {
+  flex: 0 0 80vw;
+  max-width: 1100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconic-spaces__figure {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  margin: 0;
+  width: 100%;
+}
+
+@media (min-width: 900px) {
+  .iconic-spaces__figure {
+    grid-template-columns: 1.6fr 1fr;
+    gap: var(--space-xl);
+    align-items: center;
+  }
+}
+
+.iconic-spaces__image {
+  width: 100%;
+  height: auto;
+  max-height: 70vh;
+  object-fit: cover;
+  aspect-ratio: 16 / 10; /* holds layout before images load */
+  border-radius: 4px;
+  box-shadow: var(--shadow-card);
+}
+
+.iconic-spaces__caption {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.iconic-spaces__caption-eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--text-eyebrow);
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.iconic-spaces__caption-title {
+  font-family: var(--font-display);
+  font-size: var(--text-headline-sm);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--color-cream);
+  line-height: 1.1;
+}
+
+.iconic-spaces__caption-body {
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm);
+  font-weight: 300;
+  color: var(--color-cream-muted);
+  line-height: 1.65;
+  max-width: 38ch;
+}
+
+@media (max-width: 768px) {
+  .iconic-spaces { min-height: 250vh; }
+  .iconic-spaces__slide { flex: 0 0 88vw; }
+  .iconic-spaces__image { max-height: 50vh; }
+}
+
+/* Reduced-motion fallback: stack vertically, no sticky pin, no transform. */
+@media (prefers-reduced-motion: reduce) {
+  .iconic-spaces { min-height: auto; }
+  .iconic-spaces__sticky-panel {
+    position: static;
+    height: auto;
+    overflow: visible;
+  }
+  .iconic-spaces__track {
+    flex-direction: column;
+    min-width: 0;
+    transform: none !important;
+    will-change: auto;
+    gap: var(--space-3xl);
+    padding: 0 clamp(1.5rem, 5vw, 6rem) var(--space-3xl);
+  }
+  .iconic-spaces__slide { flex: 0 0 auto; }
+  .iconic-spaces__figure { grid-template-columns: 1fr; }
 }
 
 /* ═══════════════════════════════════════════════════

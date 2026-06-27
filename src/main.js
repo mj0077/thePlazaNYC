@@ -23,6 +23,10 @@ let isPreloaderDone = false;
 let isReducedMotion = false;
 let rafId = null;
 
+// Horizontal slider state — captured once during init, read every RAF.
+let sliderSection = null;
+let sliderTrack = null;
+
 function getFrameUrl(index) {
   const seq = index < SEQ1_FRAMES ? 'sequence' : 'sequence2';
   const frameNum = index < SEQ1_FRAMES ? index + 1 : index - SEQ1_FRAMES + 1;
@@ -40,7 +44,7 @@ function loadImage(index) {
     img.onload = () => {
       imageCache.set(index, img);
       pendingLoads.delete(index);
-      
+
       // If the image just loaded is very close to where the user is looking, force a redraw
       if (Math.abs(index - Math.round(currentFrame)) < 2) {
         drawFrame(currentFrame);
@@ -60,9 +64,9 @@ async function runPreloader() {
     promises.push(
       loadImage(i).then(() => {
         const progress = ((i + 1) / PRELOAD_COUNT) * 100;
-        if(preloaderBar) {
-            preloaderBar.style.width = `${progress}%`;
-            preloaderBar.parentElement.setAttribute('aria-valuenow', Math.round(progress));
+        if (preloaderBar) {
+          preloaderBar.style.width = `${progress}%`;
+          preloaderBar.parentElement.setAttribute('aria-valuenow', Math.round(progress));
         }
       }).catch(e => console.warn(e))
     );
@@ -72,7 +76,7 @@ async function runPreloader() {
 
 function dismissPreloader() {
   isPreloaderDone = true;
-  if(preloader) preloader.classList.add('is-done');
+  if (preloader) preloader.classList.add('is-done');
   drawFrame(0);
 }
 
@@ -172,6 +176,7 @@ function animationLoop() {
   }
 
   updateParallax();
+  updateHorizontalSlider();
   updateHeader(); // New header scroll state
   rafId = requestAnimationFrame(animationLoop);
 }
@@ -186,6 +191,23 @@ function updateParallax() {
       ? `translateY(${parallaxOffset}px)`
       : `translateY(${30 + parallaxOffset}px)`;
   });
+}
+
+// Translate the slider track horizontally as the user scrolls vertically
+// through the .iconic-spaces section. Mirrors updateParallax(): one rect
+// read per frame, hardware-accelerated transform only — never scroll-jacks.
+function updateHorizontalSlider() {
+  if (!sliderSection || !sliderTrack) return;
+  const rect = sliderSection.getBoundingClientRect();
+
+  // 0 when the section's top edge reaches viewport top;
+  // 1 when the section's bottom edge reaches viewport bottom.
+  const rawProgress = -rect.top / (rect.height - window.innerHeight);
+  const progress = Math.max(0, Math.min(1, rawProgress));
+
+  const travel = sliderTrack.scrollWidth - window.innerWidth;
+  if (travel <= 0) return; // track fits in viewport — nothing to translate
+  sliderTrack.style.transform = `translate3d(${-progress * travel}px, 0, 0)`;
 }
 
 function updateHeader() {
@@ -272,6 +294,18 @@ function initTabs() {
   });
 }
 
+function initHorizontalSlider() {
+  sliderSection = document.querySelector('.iconic-spaces');
+  sliderTrack = document.querySelector('.iconic-spaces__track');
+  if (!sliderSection || !sliderTrack) return;
+
+  // Establish initial transform (no-op until the user scrolls to the section).
+  updateHorizontalSlider();
+
+  // Re-measure travel distance whenever the viewport changes.
+  window.addEventListener('resize', updateHorizontalSlider, { passive: true });
+}
+
 function checkReducedMotion() {
   isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (isReducedMotion && preloader) {
@@ -288,6 +322,7 @@ async function init() {
   initObservers();
   initFormValidation();
   initTabs();
+  initHorizontalSlider();
 
   if (!isReducedMotion) {
     await runPreloader();
